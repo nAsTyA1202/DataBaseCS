@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using MySql.Data.MySqlClient;
 
 namespace Mydatabase
 {
@@ -42,14 +43,18 @@ namespace Mydatabase
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @lU AND `password` = @pU", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @lU AND `password` = @pU;", db.GetConnection());
             command.Parameters.Add("@lU", MySqlDbType.VarChar).Value = loginUser;
             command.Parameters.Add("@pU", MySqlDbType.VarChar).Value = passUser;
                  
             adapter.SelectCommand = command;
             adapter.Fill(table);
 
-            if ((bool)table.Rows[0][3])
+            object check = table.Rows[0][3];
+
+
+            Console.WriteLine();
+            if (check.Equals((SByte)1))
             {
                 ForAdmin forAdmin = new ForAdmin();
                 forAdmin.Show();
