@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,11 +11,12 @@ using System.Windows.Forms;
 
 namespace Mydatabase
 {
-    public partial class StydentForm : Form
+    public partial class Komnata : Form
     {
         DataTable table;
         List<TextBox> textBoxes;
-        public StydentForm()
+
+        public Komnata()
         {
             InitializeComponent();
 
@@ -25,16 +24,12 @@ namespace Mydatabase
             textBoxes.Add(textBox1);
             textBoxes.Add(textBox2);
             textBoxes.Add(textBox3);
-            textBoxes.Add(textBox4);
-            textBoxes.Add(textBox5);
-            textBoxes.Add(textBox6);
-            textBoxes.Add(textBox7);
 
             DB db = new DB();
             table = new DataTable();
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `студенты`;", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `комнаты`;", db.GetConnection());
 
             db.openConnection();
 
@@ -42,7 +37,7 @@ namespace Mydatabase
             adapter.Fill(table);
 
             comboBox1.DataSource = table;
-            comboBox1.DisplayMember = "фамилия";
+            comboBox1.DisplayMember = "idкомнаты";
             comboBox1.SelectedIndex = -1;
             db.closeConnection();
         }
@@ -64,6 +59,30 @@ namespace Mydatabase
                     box.Text = table.Rows[rowNum][i++].ToString();
                 else
                     box.Text = "";
+
+            DB db = new DB();
+            DataTable table1 = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            string query =
+                "SELECT `студенты`.`имя`, `студенты`.`фамилия` " +
+                    "FROM `студенты` " +
+                    "WHERE `студенты`.`idкомнаты` = '{0}';";
+
+            MySqlCommand command = new MySqlCommand(String.Format(query, textBox1.Text), db.GetConnection());
+
+            db.openConnection();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table1);
+
+            List<string> students = new List<string>();
+            foreach (DataRow row in table1.Rows)
+                students.Add(row[0].ToString() + " " + row[1].ToString());
+
+            textBox4.Text = String.Join(", ", students);
+
+            db.closeConnection();
         }
     }
 }

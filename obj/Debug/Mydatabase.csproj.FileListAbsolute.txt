@@ -25,3 +25,9 @@ C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.exe
 C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.csproj.CopyComplete
 C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.MainForm.resources
 C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.StydentForm.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.Komnata.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.TrablForm.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.InventarForm.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.ForAdmin.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.AddForm.resources
+C:\Users\user\OneDrive\Документы\Bd\Mydatabase\obj\Debug\Mydatabase.DeleteForm.resources

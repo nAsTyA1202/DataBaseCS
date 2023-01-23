@@ -34,6 +34,7 @@ namespace Mydatabase
         {
             String loginUser = textBox1.Text;
             String passUser = textBox2.Text;
+            
 
             DB db = new DB();
 
@@ -44,20 +45,29 @@ namespace Mydatabase
             MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @lU AND `password` = @pU", db.GetConnection());
             command.Parameters.Add("@lU", MySqlDbType.VarChar).Value = loginUser;
             command.Parameters.Add("@pU", MySqlDbType.VarChar).Value = passUser;
-
+                 
             adapter.SelectCommand = command;
             adapter.Fill(table);
 
-            if (table.Rows.Count > 0)
+            if ((bool)table.Rows[0][3])
             {
-                MainForm MainForm = new MainForm();
-                MainForm.Show();
+                ForAdmin forAdmin = new ForAdmin();
+                forAdmin.Show();
                 this.Hide();
-                MainForm.Location = this.Location;
+                forAdmin.Location = this.Location;
             }
             else
-                MessageBox.Show("Неверный логин или пароль");
-
+            {
+                if (table.Rows.Count > 0)
+                {
+                    MainForm MainForm = new MainForm();
+                    MainForm.Show();
+                    this.Hide();
+                    MainForm.Location = this.Location;
+                }
+                else
+                    MessageBox.Show("Неверный логин или пароль");
+            }
 
             
         }  

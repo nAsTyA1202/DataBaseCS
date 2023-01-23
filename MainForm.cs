@@ -32,5 +32,29 @@ namespace Mydatabase
             this.Hide();
             StydentForm.Location = this.Location;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Komnata komnata = new Komnata();
+            komnata.Show();
+            this.Hide();
+            komnata.Location = this.Location;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TrablForm trablForm = new TrablForm();
+            trablForm.Show();
+            this.Hide();
+            trablForm.Location = this.Location;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            InventarForm inventarForm = new InventarForm();
+            inventarForm.Show();
+            this.Hide();
+            inventarForm.Location = this.Location;
+        }
     }
 }

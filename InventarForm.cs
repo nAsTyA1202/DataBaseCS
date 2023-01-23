@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,11 +11,12 @@ using System.Windows.Forms;
 
 namespace Mydatabase
 {
-    public partial class StydentForm : Form
+    public partial class InventarForm : Form
     {
         DataTable table;
         List<TextBox> textBoxes;
-        public StydentForm()
+
+        public InventarForm()
         {
             InitializeComponent();
 
@@ -26,15 +25,12 @@ namespace Mydatabase
             textBoxes.Add(textBox2);
             textBoxes.Add(textBox3);
             textBoxes.Add(textBox4);
-            textBoxes.Add(textBox5);
-            textBoxes.Add(textBox6);
-            textBoxes.Add(textBox7);
 
             DB db = new DB();
             table = new DataTable();
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `студенты`;", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `инвентарь`;", db.GetConnection());
 
             db.openConnection();
 
@@ -42,7 +38,7 @@ namespace Mydatabase
             adapter.Fill(table);
 
             comboBox1.DataSource = table;
-            comboBox1.DisplayMember = "фамилия";
+            comboBox1.DisplayMember = "наименование";
             comboBox1.SelectedIndex = -1;
             db.closeConnection();
         }
@@ -58,7 +54,7 @@ namespace Mydatabase
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int rowNum = comboBox1.SelectedIndex;
-            int i = 0;
+            int i = 1;
             foreach (TextBox box in textBoxes)
                 if (rowNum >= 0)
                     box.Text = table.Rows[rowNum][i++].ToString();
